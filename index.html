@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Curriculum & Attendance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Student Curriculum & Attendance Tracker</h1>
+
+    <section class="card">
+        <h2>Add Subject</h2>
+        <input type="text" id="subjectName" placeholder="Enter subject name">
+        <button onclick="addSubject()">Add Subject</button>
+    </section>
+
+    <section class="card">
+        <h2>Subjects</h2>
+        <div id="subjectList"></div>
+    </section>
+
+    <section class="card">
+        <h2>Add Curriculum Activity</h2>
+        <input type="text" id="activityInput" placeholder="Enter activity">
+        <button onclick="addActivity()">Add Activity</button>
+        <ul id="activityList"></ul>
+    </section>
+
+<script src="script.js"></script>
+</body>
+</html>
