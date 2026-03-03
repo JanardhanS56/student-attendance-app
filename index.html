@@ -1,32 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Student Curriculum & Attendance Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AttendTrack – Student Attendance & Activity Planner</title>
+    <meta name="description"
+        content="A modern student attendance tracker and activity planner with analytics and charts." />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
+
 <body>
 
-    <h1>Student Curriculum & Attendance Tracker</h1>
+    <!-- ── Navigation ── -->
+    <nav>
+        <a class="nav-brand" href="#" onclick="showPage('dashboard')">
+            <div class="brand-icon">🎓</div>
+            <span>AttendTrack</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" id="nav-dashboard" class="active" onclick="showPage('dashboard')">🏠 Dashboard</a></li>
+            <li><a href="#" id="nav-subjects" onclick="showPage('subjects')">📚 Subjects</a></li>
+            <li><a href="#" id="nav-analytics" onclick="showPage('analytics')">📊 Analytics</a></li>
+            <li><a href="#" id="nav-activities" onclick="showPage('activities')">📋 Activities</a></li>
+        </ul>
+    </nav>
 
-    <section class="card">
-        <h2>Add Subject</h2>
-        <input type="text" id="subjectName" placeholder="Enter subject name">
-        <button onclick="addSubject()">Add Subject</button>
-    </section>
+    <!-- ─────────────────────────────────── PAGE: DASHBOARD ─── -->
+    <div class="page active" id="page-dashboard">
+        <div class="page-hero">
+            <h1>Your Attendance Hub</h1>
+            <p>Track class attendance, plan your activities, and stay on top of your goals.</p>
+        </div>
+        <div class="container">
+            <div class="stats-row" id="dashboard-stats">
+                <div class="stat-card purple">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value" id="stat-subjects">0</div>
+                    <div class="stat-label">Subjects</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="stat-overall">0%</div>
+                    <div class="stat-label">Overall Attendance</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-value" id="stat-atrisk">0</div>
+                    <div class="stat-label">At Risk (&lt;75%)</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-value" id="stat-activities">0</div>
+                    <div class="stat-label">Activities</div>
+                </div>
+            </div>
 
-    <section class="card">
-        <h2>Subjects</h2>
-        <div id="subjectList"></div>
-    </section>
+            <!-- Quick Overview -->
+            <div class="section-title"><span class="dot"></span>Quick Attendance Overview</div>
+            <div class="card">
+                <div id="dashboard-overview">
+                    <div class="empty-state">
+                        <div class="empty-icon">📚</div>
+                        <p>No subjects yet. <a href="#" onclick="showPage('subjects')" style="color:var(--accent)">Add a
+                                subject</a> to get started!</p>
+                    </div>
+                </div>
+            </div>
 
-    <section class="card">
-        <h2>Add Curriculum Activity</h2>
-        <input type="text" id="activityInput" placeholder="Enter activity">
-        <button onclick="addActivity()">Add Activity</button>
-        <ul id="activityList"></ul>
-    </section>
+            <!-- Today's Activities -->
+            <div class="section-title"><span class="dot"></span>Pending Activities</div>
+            <div class="card">
+                <div id="dashboard-activities">
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <p>No activities planned. <a href="#" onclick="showPage('activities')"
+                                style="color:var(--accent)">Add an activity</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <!-- ─────────────────────────────────── PAGE: SUBJECTS ─── -->
+    <div class="page" id="page-subjects">
+        <div class="page-hero">
+            <h1>Subjects & Attendance</h1>
+            <p>Add subjects and mark your daily attendance with one click.</p>
+        </div>
+        <div class="container">
+            <!-- Add Subject -->
+            <div class="section-title"><span class="dot"></span>Add New Subject</div>
+            <div class="card">
+                <div class="add-form">
+                    <div class="input-group">
+                        <span class="input-icon">📖</span>
+                        <input type="text" id="subjectInput" placeholder="e.g. Mathematics, Physics…"
+                            onkeydown="if(event.key==='Enter')addSubject()" />
+                    </div>
+                    <button class="btn btn-primary" onclick="addSubject()">+ Add Subject</button>
+                </div>
+            </div>
+
+            <!-- Subject Cards -->
+            <div class="section-title"><span class="dot"></span>Your Subjects</div>
+            <div class="subjects-grid" id="subjectsGrid">
+                <div class="empty-state" style="grid-column:1/-1;">
+                    <div class="empty-icon">📚</div>
+                    <p>No subjects added yet. Add one above!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────────────────────────── PAGE: ANALYTICS ─── -->
+    <div class="page" id="page-analytics">
+        <div class="page-hero">
+            <h1>Attendance Analytics</h1>
+            <p>Visualize your performance with interactive charts and insights.</p>
+        </div>
+        <div class="container">
+            <div class="stats-row" id="analytics-stats">
+                <div class="stat-card purple">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value" id="an-total-classes">0</div>
+                    <div class="stat-label">Total Classes</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="an-total-present">0</div>
+                    <div class="stat-label">Classes Present</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-value" id="an-total-absent">0</div>
+                    <div class="stat-label">Classes Absent</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="an-avg">0%</div>
+                    <div class="stat-label">Average Attendance</div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3><span>📊</span> Attendance per Subject</h3>
+                    <div class="chart-container"><canvas id="barChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3><span>🍩</span> Overall Breakdown</h3>
+                    <div class="chart-container"><canvas id="doughnutChart"></canvas></div>
+                </div>
+                <div class="chart-card" style="grid-column:1/-1;">
+                    <h3><span>📈</span> Attendance Status per Subject</h3>
+                    <div class="chart-container" style="height:200px;"><canvas id="statusChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────────────────────────── PAGE: ACTIVITIES ─── -->
+    <div class="page" id="page-activities">
+        <div class="page-hero">
+            <h1>Activity Planner</h1>
+            <p>Organize your tasks, assignments, and extra-curricular activities.</p>
+        </div>
+        <div class="container">
+            <div class="section-title"><span class="dot"></span>Add Activity</div>
+            <div class="card">
+                <div class="activity-input-row">
+                    <div class="input-group">
+                        <span class="input-icon">✏️</span>
+                        <input type="text" id="activityInput" placeholder="e.g. Complete Math assignment…"
+                            onkeydown="if(event.key==='Enter')addActivity()" />
+                    </div>
+                    <button class="btn btn-primary" onclick="addActivity()">+ Add</button>
+                </div>
+            </div>
+
+            <div class="section-title"><span class="dot"></span>My Activities</div>
+            <div class="card">
+                <ul class="activity-list" id="activityList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <p>No activities yet. Add one above!</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
