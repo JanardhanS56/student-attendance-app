@@ -1,6 +1,4 @@
-# Student Curriculum & Attendance Tracker
-
-**AttendTrack**
+# Student Curriculum & Attendance Tracker: **AttendTrack**
 
 A simple, lightweight web application for tracking student attendance and managing curriculum activities. This app allows educators to monitor attendance records for multiple subjects and keep track of classroom activities.
 
