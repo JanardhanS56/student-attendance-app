@@ -6,6 +6,9 @@ LINK: https://janardhans56.github.io/student-attendance-app/
 
 <img width="1888" height="1004" alt="image" src="https://github.com/user-attachments/assets/4c999a4d-6178-4d2b-8ed6-d69865c7b6f7" />
 
+<img width="1878" height="983" alt="image" src="https://github.com/user-attachments/assets/c5f233a1-1d10-4de8-8fb3-d713a0056f6c" />
+
+
 
 ## Features
 
