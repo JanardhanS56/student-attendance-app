@@ -2,6 +2,11 @@
 
 A simple, lightweight web application for tracking student attendance and managing curriculum activities. This app allows educators to monitor attendance records for multiple subjects and keep track of classroom activities.
 
+LINK: https://janardhans56.github.io/student-attendance-app/
+
+<img width="1888" height="1004" alt="image" src="https://github.com/user-attachments/assets/4c999a4d-6178-4d2b-8ed6-d69865c7b6f7" />
+
+
 ## Features
 
 - **Subject Management**: Add and manage multiple subjects
